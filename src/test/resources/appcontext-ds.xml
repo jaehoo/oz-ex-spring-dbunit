@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        @author: Lic. José Alberto Sánchez González
+        twitter: @jaehoox
+        mail: jaehoo@gmail.com
+    -->
+
+    <context:property-placeholder location="classpath:project.properties"/>
+
+    <!-- Test Resources String's -->
+
+    <bean id="u.test.props"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+          p:fileEncoding="UTF-8"
+          p:location="classpath:config.properties"/>
+
+    <!--
+        this prefix only read data with ISO-8859-1 encoding...
+        http://stackoverflow.com/questions/2975431/how-do-you-configure-a-spring-bean-container-to-load-a-java-property-file
+
+        <util:properties id="u.test.propx" location="classpath:config.properties"/>
+    -->
+
+    <!--
+        Connection Pool Configuration
+        - C3p0 or Apache dbcp
+    -->
+    <bean id="ds.main" parent="ds.cp.c3p0" primary="true"/>
+
+    <!-- C3p0 DS  work with HSQLDB-->
+    <bean id="ds.cp.c3p0"
+          lazy-init="true"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close"
+          p:driverClass="${connection.driverClass}"
+          p:user="${connection.username}"
+          p:password="${connection.pass}"
+          p:jdbcUrl="${connection.jdbcUrl}"
+          p:acquireIncrement="5"
+          p:idleConnectionTestPeriod="60"
+          p:maxPoolSize="100"
+          p:minPoolSize="10"
+          p:maxStatements="50"/>
+
+    <!-- Apache DS -->
+    <bean id="ds.cp.dbcp"
+          lazy-init="true"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          p:driverClassName="${connection.driverClass}"
+          p:username="${connection.username}"
+          p:password="${connection.pass}"
+          p:url="${connection.jdbcUrl}"
+          p:initialSize="5"
+          p:maxActive="5"
+          p:maxIdle="5"
+          p:defaultAutoCommit="false"
+          p:defaultTransactionIsolation="2"
+          p:validationQuery="select 1"
+          p:testOnBorrow="true"/>
+
+    <!-- DBUnit Util config Beans -->
+    <bean id="util.database.initializer" class="com.bc.util.DataBaseInitializer"/>
+
+    <bean id="dbUnitDatabaseConfig"
+          class="com.github.springtestdbunit.bean.DatabaseConfigBean"
+          p:datatypeFactory-ref="util.dbunit.DataTypeFactory"
+          p:skipOracleRecyclebinTables="true"
+          scope="singleton"/>
+
+    <bean id="util.dbunit.DataTypeFactory" class="${dataTypeFactoryName}"/>
+
+    <!-- Generic DataBase Connection -->
+    <bean id="util.iDatabaseConnectionDS" class="org.dbunit.database.DatabaseConnection" scope="prototype">
+        <constructor-arg name="connection" ref="util.dbunit.conn"/>
+    </bean>
+
+    <bean id="util.iDatabaseConnection" class="${databaseConnection}" scope="prototype">
+        <constructor-arg name="connection" ref="util.dbunit.conn"/>
+        <!-- <constructor-arg name="schema"><null/></constructor-arg>-->
+        <constructor-arg name="schema" value="DB_DEMO"/>
+    </bean>
+
+    <bean id="util.dbunit.conn" factory-method="getConnection" factory-bean="ds.main" scope="prototype"/>
+    <!--<bean name="databaseTester" class="org.dbunit.DataSourceDatabaseTester">
+        <constructor-arg ref="ds.main" />
+    </bean>-->
+
+    <!--
+    Initializate DB with Spring
+
+    <jdbc:initialize-database >
+        <jdbc:script/>
+    </jdbc:initialize-database>-->
+
+
+</beans>

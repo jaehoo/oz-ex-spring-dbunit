@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!--<bean id="contextApplicationContextProvider" class="com.bc.utils.ApplicationContextProvider" />-->
+
+    <!-- JPA Configuration in Spring  -->
+
+    <!-- PERSISTENCE UNIT -->
+    <bean id="pum"
+          class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager"
+          p:defaultDataSource-ref="ds.main"
+          p:persistenceXmlLocations-ref="jpa.config"
+          p:dataSources-ref="jpa.dataSources"/>
+
+    <util:map id="jpa.dataSources">
+        <entry key="localDatasource" value-ref="ds.main" />
+    </util:map>
+
+    <util:list id="jpa.config">
+        <!--<value>WEB-INF/classes/persistence.xml</value> -->
+        <value>classpath:META-INF/persistence.xml</value>
+    </util:list>
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:persistenceUnitManager-ref="pum"/>
+
+    <!-- JPA Transaction Manager TX-->
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+
+
+    <context:annotation-config/>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
+
+<!--    <bean id="s1" class="com.bc.control.service.impl.Service1"/>
+    <bean id="s2" class="com.bc.control.service.impl.Service2"/>-->
+
+
+    <!-- Tests Services -->
+
+
+
+
+</beans>

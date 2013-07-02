@@ -1,0 +1,14 @@
+<!ELEMENT dataset (
+    BC_RULE*)>
+
+<!ELEMENT BC_RULE EMPTY>
+<!ATTLIST BC_RULE
+    id_rule CDATA #REQUIRED
+    comments CDATA #IMPLIED
+    data_type CDATA #REQUIRED
+    field_name CDATA #REQUIRED
+    length CDATA #REQUIRED
+    pos_order CDATA #REQUIRED
+    position CDATA #IMPLIED
+>
+

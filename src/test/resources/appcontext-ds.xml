@@ -31,10 +31,10 @@
 
     <!-- Test Resources String's -->
 
-    <bean id="u.test.props"
+    <!--<bean id="u.test.props"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean"
           p:fileEncoding="UTF-8"
-          p:location="classpath:config.properties"/>
+          p:location="classpath:config.properties"/> -->
 
     <!--
         this prefix only read data with ISO-8859-1 encoding...
@@ -98,8 +98,8 @@
 
     <bean id="util.iDatabaseConnection" class="${databaseConnection}" scope="prototype">
         <constructor-arg name="connection" ref="util.dbunit.conn"/>
+        <constructor-arg name="schema" value="PUBLIC"/>
         <!-- <constructor-arg name="schema"><null/></constructor-arg>-->
-        <constructor-arg name="schema" value="DB_DEMO"/>
     </bean>
 
     <bean id="util.dbunit.conn" factory-method="getConnection" factory-bean="ds.main" scope="prototype"/>

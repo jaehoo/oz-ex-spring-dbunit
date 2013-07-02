@@ -131,11 +131,11 @@
 
         <!-- JDBC Connector's-->
 
-        <!--     <dependency>
-                 <groupId>mysql</groupId>
-                 <artifactId>mysql-connector-java</artifactId>
-                 <version>${mysql.version}</version>
-             </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -265,58 +265,23 @@
 
         <resources>
 
-            <!--<resource>
-                <directory>${maven.rootBaseDir}/src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>META-INF/persistence.xml</include>
-                </includes>
-            </resource> -->
-
             <resource>
                 <directory>src/main/resources/</directory>
                 <filtering>false</filtering>
-                <includes>
-                    <include>project.properties</include>
-                </includes>
             </resource>
 
             <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
                 <includes>
-                    <!--<include>app*.xml</include>-->
-                    <!--<include>log*.xml</include>-->
-                    <include>**/*</include>
+                    <include>META-INF/persistence.xml</include>
+                    <include>hibernate.cfg.xml</include>
                 </includes>
             </resource>
 
         </resources>
 
         <testResources>
-
-
-
-            <testResource>
-                <!-- <directory>${maven.rootBaseDir}/src/main/resources</directory>-->
-                <filtering>false</filtering>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>project.properties</include>
-                    <include>config.properties</include>
-                </includes>
-            </testResource>
-
-
-            <testResource>
-                <filtering>true</filtering>
-                <directory>src/test/resources</directory>
-                <includes>
-                    <include>META-INF/persistence.xml</include>
-                    <include>hibernate.cfg.xml</include>
-                </includes>
-            </testResource>
-
 
             <testResource>
                 <filtering>false</filtering>
@@ -326,18 +291,8 @@
             <testResource>
                 <filtering>false</filtering>
                 <directory>src/test/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
             </testResource>
 
-            <!--<testResource>
-                <directory>src/main/resources/</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>hibernate.cfg.xml</include>
-                </includes>
-            </testResource>-->
         </testResources>
 
 
@@ -387,7 +342,8 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
-                <version>1.0-beta-3</version>
+
+                <!--<version>1.0-beta-3</version>-->
 
                 <dependencies>
                     <dependency>

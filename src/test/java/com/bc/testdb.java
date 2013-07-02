@@ -1,12 +1,15 @@
 package com.bc;
 
 
+import com.bc.util.AbstractDbUnitTest;
 import com.bc.util.AbstractJUnit4Test;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,25 +19,9 @@ import org.slf4j.LoggerFactory;
  * Twitter: @jaehoox
  * mail: <a href="mailto:jaehoo@gmail.com">jaehoo@gmail.com</a>
  */
-public class testdb extends AbstractJUnit4Test {
+public class testdb extends AbstractDbUnitTest {
 
     public static final Logger logger= LoggerFactory.getLogger(testdb.class);
-
-    /*@Resource(name="s2")
-    private Service2 srv;
-
-    @Test
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, value = "transactionManager")
-    @Rollback(false)
-    public void testSave() throws Exception {
-
-        srv.save();
-    }
-*/
-
-    /*@Resource(name="s1")
-    private Service1 test;*/
-
 
     @Test
     public void makeDB(){
@@ -42,11 +29,15 @@ public class testdb extends AbstractJUnit4Test {
     }
 
     @Test
-
     @DatabaseSetup(value = "classpath:sample-dataset.xml",type = DatabaseOperation.REFRESH)
+    @Rollback(false)
     public void fillDB(){
-        logger.info("Prepare case...");
+        logger.info("Fill table ...");
     }
+
+
+
+
 
 
 }

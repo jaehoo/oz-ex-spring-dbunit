@@ -93,16 +93,16 @@ public class DbUnitXmlFactory extends AbstractJUnit4Test{
         IDataSet fullDataSet = connection.createDataSet();
         FlatXmlDataSet.write(fullDataSet, new FileOutputStream(out));*/
 
-
+        //connection.getConnection().close();
         connection.close();
     }
 
-    public static void main(String[] args) throws Exception
+    /*public static void main(String[] args) throws Exception
     {
 
          new DbUnitXmlFactory().makeDataSet();
 
-      /*// database connection
+      // database connection
         Class driverClass = Class.forName("org.hsqldb.jdbcDriver");
         Connection jdbcConnection = DriverManager.getConnection(
                 "jdbc:hsqldb:sample", "sa", "");
@@ -123,8 +123,8 @@ public class DbUnitXmlFactory extends AbstractJUnit4Test{
         String[] depTableNames =
                 TablesDependencyHelper.getAllDependentTables(connection, "X");
         IDataSet depDataset = connection.createDataSet( depTableNames );
-        FlatXmlDataSet.write(depDataset, new FileOutputStream("~/dependents.xml"));*/
+        FlatXmlDataSet.write(depDataset, new FileOutputStream("~/dependents.xml"));
 
-    }
+    }                     */
 
 }

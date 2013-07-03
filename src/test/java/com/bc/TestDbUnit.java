@@ -1,15 +1,16 @@
 package com.bc;
 
 
+import com.bc.dao.UserManagerDao;
 import com.bc.util.AbstractDbUnitTest;
-import com.bc.util.AbstractJUnit4Test;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,22 +20,26 @@ import org.springframework.transaction.annotation.Transactional;
  * Twitter: @jaehoox
  * mail: <a href="mailto:jaehoo@gmail.com">jaehoo@gmail.com</a>
  */
-public class testdb extends AbstractDbUnitTest {
+public class TestDbUnit extends AbstractDbUnitTest {
 
-    public static final Logger logger= LoggerFactory.getLogger(testdb.class);
+    public static final Logger logger= LoggerFactory.getLogger(TestDbUnit.class);
+
+    @Resource(name = "daoUserManager")
+    private UserManagerDao userManagerDao;
 
     @Test
-    public void makeDB(){
+    public void testMakeDB(){
         logger.info("BOO!...");
     }
 
     @Test
     @DatabaseSetup(value = "classpath:sample-dataset.xml",type = DatabaseOperation.REFRESH)
-    @Rollback(false)
-    public void fillDB(){
-        logger.info("Fill table ...");
-    }
+    public void testListUsers(){
+        logger.info("Get All users!...");
 
+        List result= userManagerDao.listAll();
+        print(result);
+    }
 
 
 

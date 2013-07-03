@@ -5,6 +5,7 @@ import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.datatype.DefaultDataTypeFactory;
+import org.dbunit.dataset.xml.FlatDtdDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -62,27 +63,16 @@ public class DbUnitXmlFactory extends AbstractJUnit4Test{
         //dataSet.addTable("BC_RULE", "SELECT * FROM BC_RULE"); //filtered data
 
         //System Catalogs
-        String[] tableNames={
-                  "EMPLOYEE"
-               /* , "BC_COMM_RULE"
-                , "BC_SEGMENT"
-                , "BC_SEG_RULE"
-                , "BC_REGISTER"
-                , "BC_REG_CFG"
-                , "BC_ASSIGNED_RULE"*/
-                //, "BC_SYS_CFG"
-        };
+        String[] tableNames={ "USER" };
 
 
         for(String t: tableNames){
-
             dataSet.addTable(t);
-
         }
 
-        /*File dtd=applicationContext.getResource("classpath:exported-ds.dtd").getFile();
+        File dtd=applicationContext.getResource("classpath:exported-ds.dtd").getFile();
         LOG.info("dtd exists?:{}",dtd.exists());
-        FlatDtdDataSet.write(dataSet, new FileOutputStream(dtd));*/
+        FlatDtdDataSet.write(dataSet, new FileOutputStream(dtd));
 
         File out=applicationContext.getResource("classpath:exported-ds.xml").getFile();
         LOG.info("out exists?:{}", out.exists());

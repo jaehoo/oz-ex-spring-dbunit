@@ -56,12 +56,9 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
 
-<!--    <bean id="s1" class="com.bc.control.service.impl.Service1"/>
-    <bean id="s2" class="com.bc.control.service.impl.Service2"/>-->
 
-
-    <!-- Tests Services -->
-
+    <!-- Data Access Objects (DAO's) -->
+    <bean id="daoUserManager" class="com.bc.dao.impl.DbUserManager"/>
 
 
 

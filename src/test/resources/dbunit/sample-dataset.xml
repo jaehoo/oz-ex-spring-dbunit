@@ -11,4 +11,12 @@
                  employer="Financial 2"
                  hired="2012-08-06 00:00:00"
                  phone_number="551245678"/>
+
+
+
+    <USER id_user="1" name="jaehoo" password="s3cr3t" mail="test@mail.com" registered="2013-08-06 00:00:00"/>
+    <USER id_user="2" name="user2" password="s3cr3t" mail="test@mail.com" registered="2013-08-07 00:00:00"/>
+    <USER id_user="3" name="user2" password="s3cr3t" mail="test@mail.com" registered="2013-08-07 00:00:00"/>
+
+
 </dataset>

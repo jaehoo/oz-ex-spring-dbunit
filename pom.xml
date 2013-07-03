@@ -41,7 +41,6 @@
 
         <!-- Common -->
         <spring.framework.version>3.1.1.RELEASE</spring.framework.version>
-        <springframework.version>3.0.2.RELEASE</springframework.version>
         <spring.security.version>3.0.2.RELEASE</spring.security.version>
         <hibernate.version>3.6.10.Final</hibernate.version>
 
@@ -63,7 +62,6 @@
         <commons-lang.version>2.6</commons-lang.version>
     </properties>
 
-
     <dependencies>
 
         <dependency>
@@ -79,7 +77,6 @@
             <version>${dbunit.version}</version>
             <scope>test</scope>
         </dependency>
-
 
         <!-- Spring Test-->
 
@@ -99,6 +96,7 @@
 
         <!-- Connection Pools -->
         <!-- C3po -->
+
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
@@ -107,6 +105,7 @@
         </dependency>
 
         <!-- Apache Connection Pool -->
+
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -143,7 +142,6 @@
             <version>${hsqldb.version}</version>
             <scope>test</scope>
         </dependency>
-
 
         <!-- Hibernate -->
 
@@ -284,13 +282,19 @@
         <testResources>
 
             <testResource>
-                <filtering>false</filtering>
+                <directory>src/test/resources</directory>
+            </testResource>
+
+            <testResource>
                 <directory>src/test/resources/dbunit</directory>
             </testResource>
 
             <testResource>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
                 <directory>src/test/resources</directory>
+                <includes>
+                    <include>appcontext-ds.xml</include>
+                </includes>
             </testResource>
 
         </testResources>
@@ -312,38 +316,12 @@
                    </configuration>
                </plugin>-->
 
-            <!-- Maven Exec Plugin -->
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- HSQLDB server-->
-                    <mainClass>org.hsqldb.server.Server</mainClass>
-                    <arguments>
-                        <argument>--database.0</argument>
-                        <argument>file:db/DB_DEMO</argument>
-                        <!--<argument>- -sql</argument>
-                        <argument>'shutdown;'</argument>-->
-                    </arguments>
-                </configuration>
-            </plugin>
-
             <!-- DB Unit -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
-
-                <!--<version>1.0-beta-3</version>-->
+                <version>1.0-beta-3</version>
 
                 <dependencies>
                     <dependency>
@@ -359,6 +337,7 @@
                     </dependency>
                 </dependencies>
 
+                <!-- Manual Configuration -->
                 <!--<configuration>
                     <driver>com.mysql.jdbc.Driver</driver>
                     <url>jdbc:mysql://localhost:3306/buro_db</url>
@@ -370,6 +349,48 @@
 
             </plugin>
 
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+
+          <!--  <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.6.3.201306030806</version>
+                <executions>
+
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+&lt;!&ndash;
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+&ndash;&gt;
+
+
+                </executions>
+            </plugin>
+-->
 
             <!--            &lt;!&ndash; Hibernate DDL generator&ndash;&gt;
                         <plugin>
@@ -424,8 +445,6 @@
 
         </plugins>
     </build>
-
-
 
 
 </project>

@@ -37,11 +37,10 @@
     	         Note that the level of the root logger cannot be set to INHERITED or NULL.
 		<logger name=".*" level="debug"/>
         -->
+    <!-- <logger level="debug" name="com.bc.control.service.impl.SegmentFactoryValidator" />-->
 
-    <logger level="debug" name="com.bc.control.service.impl.SegmentFactoryValidator" />
 
-
-    <root level="debug">
+    <root level="info">
 
 
         <appender-ref ref="STDOUT"/>

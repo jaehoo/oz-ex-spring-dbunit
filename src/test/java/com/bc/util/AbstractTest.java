@@ -21,16 +21,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public interface AbstractTest {
 
     String APP_CTX="classpath:appcontext.xml";
-    String APP_CTX_CORE="classpath:appcontext-bc-core.xml";
     String APP_CTX_DS="classpath:appcontext-ds.xml";
 
     String TEST_START=" TEST START---------";
     String TEST_READY=" TEST READY---------";
     String TEST_END=" TEST END---------";
 
-    final String MAIN_DS ="classpath:sys_catalogs.xml";
     final String SAMPLE_DS="classpath:sample-dataset.xml";
 
-    final String SYS_CAT="classpath:sys_catalogs.xml";
-    final String BAS_CFG="classpath:basic-config.xml";
 }

@@ -12,6 +12,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import java.util.List;
 
@@ -30,14 +31,11 @@ import java.util.List;
  * </ul>
  */
 
-@ContextConfiguration(locations = {
-          AbstractTest.APP_CTX
-        , AbstractTest.APP_CTX_DS
-})
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class,
-        //TransactionalTestExecutionListener.class,
-        DbUnitTestExecutionListener.class })
+@ContextConfiguration(locations = { AbstractTest.APP_CTX, AbstractTest.APP_CTX_DS})
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class
+        , DirtiesContextTestExecutionListener.class
+        , TransactionalTestExecutionListener.class
+        , DbUnitTestExecutionListener.class })
 //@Transactional(value = "transactionManager")
 /*@it.openutils.testing.DbUnitConfiguration(
         dbUnitExecutions = {

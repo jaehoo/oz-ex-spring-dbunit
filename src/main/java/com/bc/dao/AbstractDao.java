@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Date: 25/07/11
  * Time: 01:12 PM
  */
-public abstract class AbstractDao<T, K extends Serializable> {
+public abstract class AbstractDao<T, K extends Serializable>{
 
     @PersistenceContext(unitName = "OZPU")
     protected EntityManager em;
@@ -27,8 +27,8 @@ public abstract class AbstractDao<T, K extends Serializable> {
         return em.merge(t);
     }
 
-    public T find(Class clase ,K id){
-        return (T) em.find(clase,id);
+    public T find(Class clazz ,K id){
+        return (T) em.find(clazz,id);
     }
 
     public void flush(){

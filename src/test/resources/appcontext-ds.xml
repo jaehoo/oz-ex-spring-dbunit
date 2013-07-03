@@ -98,7 +98,7 @@
 
     <bean id="util.iDatabaseConnection" class="${databaseConnection}" scope="prototype">
         <constructor-arg name="connection" ref="util.dbunit.conn"/>
-        <constructor-arg name="schema" value="PUBLIC"/>
+        <constructor-arg name="schema" value="${db.schema}"/>
         <!-- <constructor-arg name="schema"><null/></constructor-arg>-->
     </bean>
 

@@ -1,7 +1,7 @@
-oz-ex-spring-dbunit
+Spring DbUnit Example
 ===================
 
-Example to build test integration with spring and dbunit
+A simple example project to build integration test's with Spring and DbUnit
 
 
 Credits
@@ -15,7 +15,7 @@ and people like you :) . Thank you!
 License
 -------
 
-oz-ex-spring-dbunit is copyright © 2013 by Jaehoo (Alberto Sánchez) and Orbital Zero,inc. It is free software, and may be
+**oz-ex-spring-dbunit** is copyright © 2013 by Jaehoo (Alberto Sánchez) and Orbital Zero,inc. It is free software, and may be
 redistributed under the terms specified in the `LICENSE` file.
 
 The names and logos for this sample code are trademarks of Orbital Zero, inc.

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <EMPLOYEE id_employ="1"
+   <!-- <EMPLOYEE id_employ="1"
                  charge="Manager"
                  employer="Financial"
                  hired="2012-08-06 00:00:00"
@@ -10,7 +10,7 @@
                  charge="Manager 2"
                  employer="Financial 2"
                  hired="2012-08-06 00:00:00"
-                 phone_number="551245678"/>
+                 phone_number="551245678"/>-->
 
 
 
